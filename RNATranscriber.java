@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 /**
  * Problem 2
  * Given: t, a DNA String
@@ -7,11 +5,8 @@ import java.util.Scanner;
  *
  */
 public class RNATranscriber {
-	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
-		String dna = scanner.nextLine();
+	public static void transcribe(String dna) {
 		System.out.println(dna.replace('T', 'U'));
-		scanner.close();
 	}
 }
 

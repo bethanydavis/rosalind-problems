@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 /**
  * Problem 1
  * Given: s, a DNA String
@@ -8,10 +6,7 @@ import java.util.Scanner;
  */
 public class DNACounter {
 
-	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
-		String dna = scanner.nextLine();
-		
+	public static void getCounts(String dna) {
 		int countA = 0;
 		int countC = 0;
 		int countG = 0;
@@ -37,7 +32,6 @@ public class DNACounter {
 		}
 		
 		System.out.println(countA + " " + countC + " " + countG + " " + countT);
-		scanner.close();
 	}
 }
 

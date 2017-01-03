@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 /**
  * Problem 3
  * Given: A DNA String s
@@ -8,10 +6,7 @@ import java.util.Scanner;
  */
 public class DNAReverseComplement {
 
-	public static void main(String[] args) {
-		Scanner scanner = new Scanner(System.in);
-		String dna = scanner.nextLine();
-		
+	public static void getReverseComplement(String dna) {
 		String reverseComplement = "";
 		
 		for(int i = dna.length() - 1; i >= 0; i--) {
@@ -19,7 +14,6 @@ public class DNAReverseComplement {
 		}
 		
 		System.out.println(reverseComplement);
-		scanner.close();
 	}
 	
 	/**
