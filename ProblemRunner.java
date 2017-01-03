@@ -20,6 +20,9 @@ public class ProblemRunner {
 				String problemInput2 = scanner.nextLine();
 				HammingDistance.getHammingDistance(problemInput, problemInput2);
 				break;
+			case 5:
+				RNATranslation.getRNATranslation(problemInput);
+				break;
 			default:
 				break;
 
