@@ -23,6 +23,9 @@ public class ProblemRunner {
 			case 5:
 				RNATranslation.getRNATranslation(problemInput);
 				break;
+			case 6:
+				RNATranslation.predictRNAFromProtein(problemInput);
+				break;
 			default:
 				break;
 

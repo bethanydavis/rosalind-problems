@@ -99,4 +99,59 @@ public class RNATranslation {
 		}
 		System.out.println(aminoAcidChain);
 	}
+
+	public static void predictRNAFromProtein(String protein) {
+		long num = 3; // possible stop codons
+		for(int i = 0; i < protein.length(); i++) {
+			num = (num * numPossibilities(protein.substring(i, i + 1))) % 1000000;
+		}
+		System.out.println(num);
+	}
+
+	private static int numPossibilities(String aminoAcid) {
+		switch(aminoAcid) {
+			case "F":
+				return 2;
+			case "L":
+				return 6;
+			case "S":
+				return 6;
+			case "Y":
+				return 2;
+			case "C":
+				return 2;
+			case "W":
+				return 1;
+			case "P":
+				return 4;
+			case "H":
+				return 2;
+			case "Q":
+				return 2;
+			case "R":
+				return 6;
+			case "I":
+				return 3;
+			case "M":
+				return 1;
+			case "T":
+				return 4;
+			case "N":
+				return 2;
+			case "K":
+				return 2;
+			case "V":
+				return 4;
+			case "A":
+				return 4;
+			case "D":
+				return 2;
+			case "E":
+				return 2;
+			case "G":
+				return 4;
+			default:
+				return 1;
+		}
+	}
 }
