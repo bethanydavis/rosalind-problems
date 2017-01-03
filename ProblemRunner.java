@@ -26,6 +26,9 @@ public class ProblemRunner {
 			case 6:
 				RNATranslation.predictRNAFromProtein(problemInput);
 				break;
+			case 7:
+				ProteinMass.calculateMass(problemInput);
+				break;
 			default:
 				break;
 
