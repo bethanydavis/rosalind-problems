@@ -16,6 +16,10 @@ public class ProblemRunner {
 			case 3:
 				DNAReverseComplement.getReverseComplement(problemInput);
 				break;
+			case 4:
+				String problemInput2 = scanner.nextLine();
+				HammingDistance.getHammingDistance(problemInput, problemInput2);
+				break;
 			default:
 				break;
 
