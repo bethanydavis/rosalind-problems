@@ -1,4 +1,9 @@
 public class RNATranslation {
+
+	/**
+	* Return the amino acid symbol produced by
+	* translating the given RNA codon
+	*/
 	public static String getProtein(String codon) {
 		switch(codon) {
 			case "UUU":
@@ -87,7 +92,10 @@ public class RNATranslation {
 		}
 	}
 
-	public static void getRNATranslation(String rna) {
+	/**
+	* Return the protein produced by translating the given RNA strand
+	*/
+	public static String getRNATranslation(String rna) {
 		String aminoAcidChain = "";
 		for(int i = 0; i < rna.length(); i = i + 3) {
 			String codon = rna.substring(i, i+3);
@@ -97,17 +105,25 @@ public class RNATranslation {
 				aminoAcidChain += getProtein(codon);
 			}
 		}
-		System.out.println(aminoAcidChain);
+		return aminoAcidChain;
 	}
 
-	public static void predictRNAFromProtein(String protein) {
+	/**
+	* Return the number of unique RNA strands that could have produced
+	* the given protein, mod 1,000,000
+	*/
+	public static long predictRNAFromProtein(String protein) {
 		long num = 3; // possible stop codons
 		for(int i = 0; i < protein.length(); i++) {
 			num = (num * numPossibilities(protein.substring(i, i + 1))) % 1000000;
 		}
-		System.out.println(num);
+		return num;
 	}
 
+	/**
+	* Return the number of unique codons that could have produced
+	* the given amino acid
+	*/
 	private static int numPossibilities(String aminoAcid) {
 		switch(aminoAcid) {
 			case "F":

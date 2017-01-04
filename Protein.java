@@ -1,12 +1,19 @@
-public class ProteinMass {
-	public static void calculateMass(String protein) {
+public class Protein {
+
+	/**
+	* Return the mass of the protein based on the mass of each amino acid
+	*/
+	public static double calculateMass(String protein) {
 		double totalMass = 0;
 		for(int i = 0; i < protein.length(); i++) {
 			totalMass += getAcidMass(protein.charAt(i));
 		}
-		System.out.println(totalMass);
+		return totalMass;
 	}
 
+	/**
+	* Return the mass of the given amino acid
+	*/
 	private static double getAcidMass(char acid) {
 		switch(acid) {
 			case 'A':
