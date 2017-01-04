@@ -1,4 +1,5 @@
 import java.util.*;
+import java.io.*;
 
 public class Dna {
 
@@ -99,6 +100,65 @@ public class Dna {
     }
     
     return reverseComplement;
+  }
+
+  /**
+  * Return the percentage of symbols in the given DNA that are 'C' or 'G'
+  */
+  private static double getGCContent(String dna) {
+    double gcCount = 0;
+    for(int i = 0; i < dna.length(); i++) {
+      if(dna.charAt(i) == 'C' || dna.charAt(i) == 'G') {
+        gcCount++;
+      }
+    }
+    return gcCount / dna.length() * 100;
+  }
+
+  /**
+  * @param idToContent a mapping of FASTA ids to GC content of each DNA strand
+  * @return String containing max GC content and 
+  * corresponding FASTA id of DNA strand
+  */
+  public static String findMaxGCContent(Map<String, Double> idToContent) {
+    String maxId = "";
+    double maxContent = 0;
+
+    for(String id : idToContent.keySet()) {
+      double currContent = idToContent.get(id);
+      if(currContent > maxContent) {
+        maxContent = currContent;
+        maxId = id;
+      }
+    }
+
+    return maxId + " " + maxContent;
+  }
+
+  /**
+  * @param filename file specifying FASTA ids and DNA content of each strand
+  * @return a mapping of FASTA ids to GC content of each DNA strand
+  */
+  public static Map<String, Double> buildGCContentMap(String filename) {
+    Map<String, Double> idToContent = new HashMap<String, Double>();
+    try {
+      BufferedReader reader = new BufferedReader(new FileReader(filename));
+
+      String id = reader.readLine();
+      while(id != null) {
+        String dnaStrand = reader.readLine();
+        String nextLine = reader.readLine();
+        while(nextLine != null && nextLine.charAt(0) != '>') {
+          dnaStrand += nextLine;
+          nextLine = reader.readLine();
+        }
+        idToContent.put(id, getGCContent(dnaStrand));
+        id = nextLine;        
+      }
+
+      reader.close();
+    } catch(IOException e) { e.printStackTrace(); }
+    return idToContent;
   }
 
 }
