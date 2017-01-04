@@ -29,6 +29,9 @@ public class ProblemRunner {
 			case 7:
 				ProteinMass.calculateMass(problemInput);
 				break;
+			case 8:
+				String dnaSubstring = scanner.nextLine();
+				Dna.findMotif(problemInput, dnaSubstring);
 			default:
 				break;
 
