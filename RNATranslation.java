@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class RNATranslation {
 
 	/**
@@ -93,34 +95,6 @@ public class RNATranslation {
 	}
 
 	/**
-	* Return the protein produced by translating the given RNA strand
-	*/
-	public static String getRNATranslation(String rna) {
-		String aminoAcidChain = "";
-		for(int i = 0; i < rna.length(); i = i + 3) {
-			String codon = rna.substring(i, i+3);
-			if(codon.equals("UAG") || codon.equals("UAA") || codon.equals("UGA")) {
-				break;
-			} else {
-				aminoAcidChain += getProtein(codon);
-			}
-		}
-		return aminoAcidChain;
-	}
-
-	/**
-	* Return the number of unique RNA strands that could have produced
-	* the given protein, mod 1,000,000
-	*/
-	public static long predictRNAFromProtein(String protein) {
-		long num = 3; // possible stop codons
-		for(int i = 0; i < protein.length(); i++) {
-			num = (num * numPossibilities(protein.substring(i, i + 1))) % 1000000;
-		}
-		return num;
-	}
-
-	/**
 	* Return the number of unique codons that could have produced
 	* the given amino acid
 	*/
@@ -169,5 +143,61 @@ public class RNATranslation {
 			default:
 				return 1;
 		}
+	}
+
+	/**
+	* Return the protein produced by translating the given RNA strand
+	*/
+	public static String getRNATranslation(String rna) {
+		String aminoAcidChain = "";
+		for(int i = 0; i < rna.length(); i = i + 3) {
+			String codon = rna.substring(i, i+3);
+			if(codon.equals("UAG") || codon.equals("UAA") || codon.equals("UGA")) {
+				break;
+			} else {
+				aminoAcidChain += getProtein(codon);
+			}
+		}
+		return aminoAcidChain;
+	}
+
+	/**
+	* Return the number of unique RNA strands that could have produced
+	* the given protein, mod 1,000,000
+	*/
+	public static long predictRNAFromProtein(String protein) {
+		long num = 3; // possible stop codons
+		for(int i = 0; i < protein.length(); i++) {
+			num = (num * numPossibilities(protein.substring(i, i + 1))) % 1000000;
+		}
+		return num;
+	}
+
+	/**
+	* Return all possible proteins that could be translated from the given dna
+	*/
+	public static Set<String> translateAllProteins(String dna) {
+		Set<String> allProteins = new HashSet<String>();
+		String rna = RNATranscription.transcribe(dna);
+		List<Integer> startingIndeces = findStartCodon(rna);
+
+		for(Integer start : startingIndeces) {
+			allProteins.add(getRNATranslation(rna.substring(start, rna.length())));
+		}
+
+		return allProteins;
+	}
+
+	/**
+	* Return a list of 0-indexed positions of "AUG" in the given rna String
+	*/
+	private static List<Integer> findStartCodon(String rna) {
+		List<Integer> indeces = new ArrayList<Integer>();
+		for(int i = 0; i < rna.length() - 3; i++) {
+			if(rna.substring(i, i + 3).equals("AUG")) {
+				indeces.add(i);
+			}
+		}
+		return indeces;
 	}
 }
